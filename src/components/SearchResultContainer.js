@@ -2,6 +2,7 @@ import React, { Component } from "react";
 import SearchForm from "./SearchForm";
 import ResultList from "./ResultList";
 import API from "../utils/API";
+import Table from "./Table";
 
 // SORT BY CATEGORY CODE SOMEWHERE IN HERE
 class SearchResultContainer extends Component {
@@ -11,22 +12,11 @@ class SearchResultContainer extends Component {
     };
 
     componentDidMount() {
-        this.searchEmployee("");
-    }
-
-    searchEmployee = query => {
-        API.search(query)
+        API.searchEmployee()
             .then(res => this.setState({ results: res.data.data }))
             .catch(err => console.log(err));
     };
-// LOGIC FOR FILTERING GOES HERE
-    handleInputChange = event => {
-        const name = event.target.name;
-        const value = event.target.value;
-        this.setState({
-            [name]: value
-        });
-    };
+    // LOGIC FOR FILTERING GOES HERE
 
     // When the form is submitted, search the Random User API for `this.state.search`
     handleFormSubmit = event => {
@@ -35,6 +25,14 @@ class SearchResultContainer extends Component {
     };
 
     render() {
+        let filterEmployee = this.state.results.filter((employee) => {
+            return (
+                employee.name.last
+                    .toLowerCase()
+                    .indexOf(this.state.search.toLowerCase()) !== -1
+            );
+        });
+
         return (
             <div>
                 <SearchForm
@@ -42,7 +40,10 @@ class SearchResultContainer extends Component {
                     handleFormSubmit={this.handleFormSubmit}
                     handleInputChange={this.handleInputChange}
                 />
-                <ResultList results={this.state.results} />
+                <Table />
+                <ResultList
+                    results={this.state.results}
+                    filterEmployee={filterEmployee} />
             </div>
         );
     }
