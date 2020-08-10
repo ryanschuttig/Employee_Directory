@@ -5,11 +5,11 @@ function Table() {
     <table className="table table-hover table-striped">
       <thead className="thead-dark">
         <tr>
-          <th scope="col">Image</th>
-          <th scope="col">First Name</th>
-          <th scope="col">Last Name</th>
-          <th scope="col">Email</th>
-          <th scope="col">Age</th>
+          <th scope="col-md-2">Image</th>
+          <th scope="col-md-3">First Name</th>
+          <th scope="col-md-3">Last Name</th>
+          <th scope="col-md-2">Email</th>
+          <th scope="col-md-2">Age</th>
         </tr>
       </thead>
     </table>

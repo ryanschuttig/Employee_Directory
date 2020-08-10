@@ -1,5 +1,4 @@
 import React, { Component } from "react";
-import SearchForm from "./SearchForm";
 import ResultList from "./ResultList";
 import API from "../utils/API";
 import Table from "./Table";
@@ -13,15 +12,16 @@ class SearchResultContainer extends Component {
 
     componentDidMount() {
         API.searchEmployee()
-            .then(res => this.setState({ results: res.data.data }))
+            .then(res => this.setState({ results: res.data.results }))
             .catch(err => console.log(err));
     };
-    // LOGIC FOR FILTERING GOES HERE
+    // LOGIC FOR FILTERING
+    
 
     // When the form is submitted, search the Random User API for `this.state.search`
-    handleFormSubmit = event => {
+    handleInputChange = event => {
         event.preventDefault();
-        this.searchEmployee(this.state.search);
+        this.setState({ search: event.target.value });
     };
 
     render() {
@@ -35,11 +35,21 @@ class SearchResultContainer extends Component {
 
         return (
             <div>
-                <SearchForm
-                    search={this.state.search}
-                    handleFormSubmit={this.handleFormSubmit}
-                    handleInputChange={this.handleInputChange}
-                />
+                <div class="jumbotron jumbotron-fluid mb-0">
+                    <div class="container text-center">
+                        <h1 class="display-4">Employee Directory</h1>
+                        <input
+                            name="search"
+                            type="text"
+                            className="form-control"
+                            placeholder="Search"
+                            id="search"
+                            class="md-3"
+                            onChange={this.handleInputChange.bind(this)}
+                            value={this.state.search}
+                        />
+                    </div>
+                </div>
                 <Table />
                 <ResultList
                     results={this.state.results}

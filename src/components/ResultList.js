@@ -5,13 +5,13 @@ function ResultList({ filterEmployee }) {
     <>
       {filterEmployee.map((employee) => (
         <div className="row emp-card" key={filterEmployee.indexOf(employee)}>
-          <div className="col-md-1">
+          <div className="col-md-2">
             <img src={employee.picture.large} alt="Employee Image" />
           </div>
-          <div className="col-md-2">{employee.name.first}</div>
-          <div className="col-md-2">{employee.name.last}</div>
-          <div className="col-md-1">{employee.email}</div>
-          <div className="col-md-1">{employee.dob.split("T")[0]}</div>
+          <div className="col-md-3">{employee.name.first}</div>
+          <div className="col-md-3">{employee.name.last}</div>
+          <div className="col-md-2">{employee.email}</div>
+          <div className="col-md-2">{employee.dob.date.split("T")[0]}</div>
         </div>
       ))}
     </>

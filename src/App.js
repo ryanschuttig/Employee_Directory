@@ -3,9 +3,7 @@ import SearchResultContainer from "./components/SearchResultContainer";
 
 function App() {
   return (
-    <wrapper>
       <SearchResultContainer />
-    </wrapper>
   );
 }
 
